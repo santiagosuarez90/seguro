@@ -45,6 +45,9 @@
                   <div class="invalid-feedback" *ngIf="formLogin.get('user').hasError('required') && formLogin.get('user').touched">
                     Campo Obligatorio
                   </div>
+                  <div style="width: 100%; margin-top: 0.25rem; font-size: 0.875em; color: #d92550;" *ngIf="formLogin.errors?.unauthenticated">
+                   Credenciales Incorrectas
+                  </div>
                 </div>
               </fieldset>
             </div>

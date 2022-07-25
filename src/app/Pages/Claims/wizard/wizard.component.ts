@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -8,6 +8,8 @@ import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
+
+import Swal from 'sweetalert2';
 
 const moment = _rollupMoment || _moment;
 
@@ -23,9 +25,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-claim-wizard',
   templateUrl: './wizard.component.html',
   styles: [`
-    .mat-list-icon {
-      color: rgba(0, 0, 0, 0.54);
-    }
     .wizard-tab-content {
       padding: 16px;
     }`
@@ -37,7 +36,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class WizardComponent implements OnInit {
-
   heading = 'Siniestro';
   subheading = 'Registrar un nuevo siniestro.';
   icon = 'pe-7s-wallet icon-gradient bg-plum-plate';
@@ -60,7 +58,11 @@ export class WizardComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder) {
+
   }
+
+  codeOne = this.generateRandom();
+  codeSecond = this.generateRandom();
 
   cities = [
     { value: '01', name: 'Quito' },
@@ -176,4 +178,25 @@ export class WizardComponent implements OnInit {
       });
     }
   };
+
+  create = function (){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'El siniestro fue reportado exitosamente.',
+      showConfirmButton: false,
+      timer: 2500
+    });
+
+    // this.stepper.reset();
+    this.formHolder.reset();
+    this.formAffected.reset();
+    this.formClaim.reset();
+    this.formPolicy.reset();
+    this.formResume.reset();
+  }
+
+  generateRandom(){
+    return Math.floor(Math.random() * 1000000);
+  }
 }

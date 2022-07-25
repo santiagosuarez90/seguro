@@ -453,18 +453,33 @@
             </form>
           </mat-step>
           <mat-step [stepControl]="formResume">
+            <ng-template matStepLabel>Resumen</ng-template>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2 class="text-primary">!Gracias por reportar su Siniestro¡</h2>
+              </div>
+            </div>
 
             <div class="row">
-              <div class="col-md-4">Final</div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4"></div>
+              <div class="col-md-12 text-center">
+                <h2>Su número de caso es VID-{{ codeOne }}-{{ codeSecond }}</h2>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                  <h4 class="alert-heading">Atención!</h4>
+                  <p>La información será enviada al correo y número de la persona de contacto.</p>
+                </div>
+              </div>
             </div>
 
             <br>
 
             <div>
               <button class="me-2 mb-2" mat-raised-button matStepperPrevious color="secondary">Regresar</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button class="me-2 mb-2" mat-raised-button color="primary" mat-button (click)="create()">Finalizar</button>
             </div>
           </mat-step>
         </mat-stepper>

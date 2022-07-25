@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from "../../Commons/auth.guard";
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: 'wizard',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./wizard/wizard.module').then(m => m.WizardModule)
       }
     ]
