@@ -1,0 +1,56 @@
+// User Pages
+
+.app-logo {
+  height: $logo-height;
+  width: $logo-width;
+  background: url('/assets/images/logo-inverse.png');
+}
+
+.app-logo-seguro {
+  height: $logo-seguro-height;
+  width: $logo-seguro-width;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.app-logo-login {
+  height: $logo-login-height;
+  width: $logo-login-width;
+  padding-top: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.text-login {
+  padding: 25px;
+  font-size: 2rem;
+  display: block;
+  line-height: 1;
+  margin: 1rem auto;
+  text-align: left;
+}
+
+.app-logo-inverse {
+  height: $logo-height;
+  width: $logo-width;
+  background: url('/assets/images/logo.png');
+}
+
+.app-login-box {
+  .app-logo {
+    margin-bottom: $layout-spacer-lg;
+  }
+
+  h4 {
+    margin-bottom: $layout-spacer-x;
+    font-weight: normal;
+
+    div {
+      opacity: .6;
+    }
+
+    span {
+      font-size: $font-size-lg;
+    }
+  }
+}
