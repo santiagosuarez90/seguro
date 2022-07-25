@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <div class="card main-card mb-3">
       <div class="card-body">
-        <mat-stepper linear #stepper selectedIndex="3">
+        <mat-stepper linear #stepper selectedIndex="0">
           <mat-step [stepControl]="formHolder">
             <form [formGroup]="formHolder">
               <ng-template matStepLabel>Datos del Titular</ng-template>
@@ -334,7 +334,13 @@
                 <mat-tab label="Documentos">
                   <div class="wizard-tab-content">
                     <h3>Ingrese los Documentos de Respaldo</h3>
-
+                    <dropzone
+                    class="dropzone-container"
+                    [config]="config"
+                    [message]="'Haga clic o arrastre las imágenes aquí para cargar'"
+                    (init)="onUploadInit($event)"
+                    (error)="onUploadError($event)"
+                    (success)="onUploadSuccess($event)"></dropzone>
                   </div>
                 </mat-tab>
               </mat-tab-group>
@@ -347,8 +353,8 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="fourFormGroup">
-            <form [formGroup]="fourFormGroup">
+          <mat-step [stepControl]="formPolicy">
+            <form [formGroup]="formPolicy">
               <ng-template matStepLabel>Datos de la Póliza</ng-template>
 
               <h3>Selecciona la Poliza para el reclamo</h3>
@@ -362,7 +368,7 @@
                       <tr>
                         <td class="text-center" style="width: 78px;">
                           <div class="custom-checkbox custom-control form-check">
-                            <input type="checkbox" id="eCheckbox1" class="form-check-input">
+                            <input type="checkbox" class="form-check-input">
                             <label for="eCheckbox1" class="form-label form-check-label">&nbsp;</label>
                           </div>
                         </td>
@@ -399,7 +405,7 @@
                       <tr>
                         <td class="text-center" style="width: 78px;">
                           <div class="custom-checkbox custom-control form-check">
-                            <input type="checkbox" id="eCheckbox1" class="form-check-input">
+                            <input type="checkbox" class="form-check-input">
                             <label for="eCheckbox1" class="form-label form-check-label">&nbsp;</label>
                           </div>
                         </td>
@@ -446,10 +452,10 @@
               </div>
             </form>
           </mat-step>
-          <mat-step>
+          <mat-step [stepControl]="formResume">
 
             <div class="row">
-              <div class="col-md-4"></div>
+              <div class="col-md-4">Final</div>
               <div class="col-md-4"></div>
               <div class="col-md-4"></div>
             </div>

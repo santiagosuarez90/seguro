@@ -15,7 +15,16 @@ import { WizardComponent } from './wizard.component';
 import { WizardRoutingModule } from './wizard-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+  url: 'https://httpbin.org/post',
+  maxFilesize: 50,
+  acceptedFiles: 'image/*'
+};
 
 @NgModule({
   imports: [
@@ -34,7 +43,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatTabsModule,
     MatCheckboxModule,
+    DropzoneModule,
   ],
-  declarations: [WizardComponent]
+  declarations: [WizardComponent],
+  providers: [
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG
+    }
+  ]
 })
 export class WizardModule { }

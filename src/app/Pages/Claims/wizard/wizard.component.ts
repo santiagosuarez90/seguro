@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DropzoneConfigInterface, DropzoneDirective } from 'ngx-dropzone-wrapper';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -45,7 +45,19 @@ export class WizardComponent implements OnInit {
   formHolder: FormGroup;
   formAffected: FormGroup;
   formClaim: FormGroup;
-  fourFormGroup: FormGroup;
+  formPolicy: FormGroup;
+  formResume: FormGroup;
+
+  public config: DropzoneConfigInterface = {
+    clickable: true,
+    uploadMultiple : true,
+    maxFiles: 6,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    addRemoveLinks: true,
+    autoProcessQueue: true,
+  };
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -76,6 +88,18 @@ export class WizardComponent implements OnInit {
   ];
 
   matcher = new MyErrorStateMatcher();
+
+  public onUploadInit(args: any): void {
+    console.log('onUploadInit:', args);
+  }
+
+  public onUploadError(args: any): void {
+    console.log('onUploadError:', args);
+  }
+
+  public onUploadSuccess(args: any): void {
+    console.log('onUploadSuccess:', args);
+  }
 
   ngOnInit() {
     this.formHolder = this.formBuilder.group({
@@ -116,8 +140,10 @@ export class WizardComponent implements OnInit {
       claimContactPhone: ['', Validators.required],
     });
 
-    this.fourFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.formPolicy = this.formBuilder.group({
+    });
+
+    this.formResume = this.formBuilder.group({
     });
   }
 
