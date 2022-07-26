@@ -6,12 +6,12 @@
       <div class="card-body">
         <mat-stepper linear #stepper selectedIndex="0">
           <mat-step [stepControl]="formHolder">
-            <form [formGroup]="formHolder">
+            <form [formGroup]="formHolder" layout-margin="25">
               <ng-template matStepLabel>Datos del Titular</ng-template>
               <br>
               <h3>Ingrese información del asegurado</h3>
               <br>
-              <div class="row">
+              <div flex class="row form-group">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <mat-placeholder>Cédula</mat-placeholder>
@@ -29,7 +29,7 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
+              <div flex class="row form-group mt-3">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Nombres" formControlName="holderName" [errorStateMatcher]="matcher">
@@ -47,8 +47,8 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6">
+              <div flex class="row form-group mt-3">
+                <div flex class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Dirección" formControlName="holderAddress" [errorStateMatcher]="matcher">
                     <mat-error *ngIf="formHolder.get('holderAddress').hasError('required')">
@@ -56,7 +56,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-md-6">
+                <div flex class="col-md-6">
                  <mat-form-field style="width: 100%;">
                    <input matInput #holderPhone placeholder="Número Celular" formControlName="holderPhone" [errorStateMatcher]="matcher" [maxLength]="10">
                    <mat-hint align="end">{{holderPhone.value?.length || 0}}/10</mat-hint>
@@ -66,7 +66,7 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group mt-3">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Correo Electrónico" formControlName="holderEmail" [errorStateMatcher]="matcher">
@@ -96,12 +96,10 @@
           <mat-step [stepControl]="formAffected">
             <form [formGroup]="formAffected">
               <ng-template matStepLabel>Datos del Afectado</ng-template>
-
               <br>
-
               <h3>Ingrese información del siniestrado</h3>
               <br>
-              <div class="row">
+              <div class="row form-group">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <mat-placeholder>Cédula</mat-placeholder>
@@ -119,7 +117,7 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group mt-3">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Nombres" formControlName="affectedName" [errorStateMatcher]="matcher">
@@ -137,7 +135,7 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group mt-3">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Dirección" formControlName="affectedAddress" [errorStateMatcher]="matcher">
@@ -156,7 +154,7 @@
                  </mat-form-field>
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group mt-3">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <input matInput placeholder="Correo Electrónico" formControlName="affectedEmail" [errorStateMatcher]="matcher">
@@ -187,17 +185,13 @@
           <mat-step [stepControl]="formClaim">
             <form [formGroup]="formClaim">
               <ng-template matStepLabel>Datos del Siniestro</ng-template>
-
               <br>
-
               <mat-tab-group>
                 <mat-tab label="Siniestro">
                   <div class="wizard-tab-content">
                     <h3>Ingrese los datos del Siniestro</h3>
-
                     <br>
-
-                    <div class="row">
+                    <div class="row form-group">
                       <div class="col-md-6">
                         <mat-form-field style="width: 100%;">
                           <input matInput formControlName="claimDate" [matDatepicker]="claimDatePicker" [errorStateMatcher]="matcher" placeholder="Fecha de Ocurrencia">
@@ -215,7 +209,7 @@
                        </mat-form-field>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-group mt-3">
                       <div class="col-md-12">
                         <mat-form-field style="width: 100%">
                           <textarea matInput placeholder="Descripción de lo Sucedido" formControlName="claimDescription" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
@@ -225,7 +219,7 @@
                         </mat-form-field>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-group mt-3">
                       <div class="col-md-12">
                         <mat-form-field style="width: 100%;">
                           <mat-select placeholder="Causa de la Muerte" formControlName="claimDead">
@@ -241,10 +235,8 @@
                 <mat-tab label="Contacto">
                   <div class="wizard-tab-content">
                     <h3>Ingrese los datos del Contacto</h3>
-
                     <br>
-
-                    <div class="row">
+                    <div class="row form-group">
                       <div class="col-md-4">
                         <mat-form-field style="width: 100%;">
                           <input matInput placeholder="Cédula" formControlName="claimContactIdentification" [errorStateMatcher]="matcher">
@@ -264,7 +256,7 @@
 
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-group mt-3">
                       <div class="col-md-4">
                         <mat-form-field style="width: 100%;">
                           <input matInput placeholder="Nombres" formControlName="claimContactName" [errorStateMatcher]="matcher">
@@ -291,7 +283,7 @@
                         </mat-form-field>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-group mt-3">
                       <div class="col-md-8">
                         <mat-form-field style="width: 100%;">
                           <input matInput placeholder="Dirección" formControlName="claimContactAddress" [errorStateMatcher]="matcher">
@@ -310,7 +302,7 @@
                         </mat-form-field>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-group mt-3">
                       <div class="col-md-6">
                         <mat-form-field style="width: 100%;">
                           <input matInput placeholder="Correo Electrónico" formControlName="claimContactEmail" [errorStateMatcher]="matcher">
@@ -334,14 +326,14 @@
                 <mat-tab label="Documentos">
                   <div class="wizard-tab-content">
                     <h3>Ingrese los Documentos de Respaldo</h3>
+                    <br>
                     <dropzone
                     class="dropzone-container"
                     [config]="config"
                     [message]="'Haga clic o arrastre las imágenes aquí para cargar'"
                     (init)="onUploadInit($event)"
                     (error)="onUploadError($event)"
-                    (success)="onUploadSuccess($event)"></dropzone>
-                  </div>
+                    (success)="onUploadSuccess($event)"></dropzone></div>
                 </mat-tab>
               </mat-tab-group>
 
@@ -356,11 +348,9 @@
           <mat-step [stepControl]="formPolicy">
             <form [formGroup]="formPolicy">
               <ng-template matStepLabel>Datos de la Póliza</ng-template>
-
-              <h3>Selecciona la Poliza para el reclamo</h3>
-
               <br>
-
+              <h3>Selecciona la Poliza para el reclamo</h3>
+              <br>
               <div class="bg-white">
                 <div class="table-responsive">
                   <table class="text-nowrap table-lg mb-0 table table-hover align-middle">

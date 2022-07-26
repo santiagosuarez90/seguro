@@ -10,7 +10,7 @@
 @import "themes/layout-variables";
 
 // 3. Include remainder of required Bootstrap stylesheets
- 
+
 @import "components/bootstrap5/variables";
 @import "components/bootstrap5/mixins";
 @import "components/bootstrap5/utilities";
@@ -149,4 +149,7 @@
 
 // // DEMO
 @import "demo-ui/demo";
+
+// // FORMS
+@import "forms/forms";
 

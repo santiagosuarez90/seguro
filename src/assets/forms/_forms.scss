@@ -1,0 +1,15 @@
+mat-error{
+  color: $red !important;
+}
+
+.mat-form-field.mat-warn .mat-input-element, .mat-form-field-invalid .mat-input-element {
+  caret-color:  $red !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $red !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: $red !important;
+}
