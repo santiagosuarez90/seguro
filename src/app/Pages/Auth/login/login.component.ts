@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Cookie } from 'ng2-cookies';
 import { Router } from '@angular/router';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -22,19 +31,22 @@ export class LoginComponent implements OnInit {
     autoplaySpeed : 3000
   };
 
-  formLogin = new FormGroup({
-    user: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    rememberMe: new FormControl('', Validators.email),
-  });
+  formLogin: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     if (Cookie.check('id_token')){
       this.router.navigate(['/claims/wizard']);
     }
   }
 
+  matcher = new MyErrorStateMatcher();
+
   ngOnInit() {
+    this.formLogin = this.formBuilder.group({
+      user: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      rememberMe: new FormControl('', Validators.email),
+    });
   }
 
   handleValidSubmit() {

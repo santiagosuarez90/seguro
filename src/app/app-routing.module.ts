@@ -5,8 +5,6 @@ import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.compone
 
 // // Pages
 
-import { LoginComponent } from './Pages/Auth/login/login.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -28,7 +26,8 @@ const routes: Routes = [
     component: PagesLayoutComponent,
     children: [
       {
-        path: 'login', component: LoginComponent, data: { extraParameter: '' }
+        path: '',
+        loadChildren: () => import('./Pages/Auth/Auths.module').then(m => m.AuthsModule)
       },
     ]
   },

@@ -83,12 +83,6 @@ import { FooterComponent } from './Layout/Components/footer/footer.component';
 import { FooterDotsComponent } from './Layout/Components/footer/elements/footer-dots/footer-dots.component';
 import { FooterMenuComponent } from './Layout/Components/footer/elements/footer-menu/footer-menu.component';
 
-// Pages
-
-
-import { LoginComponent } from './Pages/Auth/login/login.component';
-
-
 // Components
 
 // import { NgbdSortableHeaderDirective } from './DemoPages/Tables/dynamic/demo/sortable.directive';
@@ -146,12 +140,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     FooterComponent,
     FooterDotsComponent,
     FooterMenuComponent,
-
-    // // User Pages
-
-
-    LoginComponent,
-
 
     // Tables
     // NgbdSortableHeaderDirective,
