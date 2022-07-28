@@ -30,7 +30,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   imports: [
     CommonModule,
     WizardRoutingModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
