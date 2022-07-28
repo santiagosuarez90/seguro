@@ -28,7 +28,7 @@
     </div>
     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
       <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
-        <form  [formGroup]="formLogin" class="needs-validation col-lg-6 offset-lg-3" (validSubmit)="this.handleValidSubmit()">
+        <form  [formGroup]="formLogin" class="needs-validation col-lg-6 offset-lg-3" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="col-md-12 text-center">
               <img mat-card-image src="/assets/images/login/logo.png" class="app-logo-seguro" alt="Logo Seguro">
@@ -36,6 +36,10 @@
           </div>
 
           <br>
+
+          <div *ngIf="showAlert" class="alert alert-danger" role="alert">
+            Credenciales Incorrectas
+          </div>
 
           <div class="row">
             <div class="col-md-12">
@@ -50,10 +54,8 @@
           <div flex class="row form-group mt-3">
             <div class="col-md-12">
               <mat-form-field style="width: 100%;">
-                <input matInput placeholder="Contraseña" formControlName="password" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="formLogin.get('password').hasError('required')">
-                  Campo Obligatorio
-                </mat-error>
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+                <mat-icon style="cursor: pointer" matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
               </mat-form-field>
             </div>
           </div>

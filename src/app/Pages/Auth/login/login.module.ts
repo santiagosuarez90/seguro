@@ -5,7 +5,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MatInputModule } from '@angular/material/input';
 import { LoginRoutingModule } from "./login-routing.module";
 import { LoginComponent } from "./login.component";
-
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -16,6 +16,7 @@ import { LoginComponent } from "./login.component";
     LoginRoutingModule,
     SlickCarouselModule,
     MatInputModule,
+    MatIconModule,
   ],
   declarations: [LoginComponent],
   providers: []

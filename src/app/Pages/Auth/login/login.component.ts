@@ -18,6 +18,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styles: []
 })
 export class LoginComponent implements OnInit {
+  hide = true;
+  showAlert = false;
 
   slideConfig = {
     className: 'center',
@@ -49,27 +51,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleValidSubmit() {
-    this.formLogin.setErrors({ unauthenticated: false });
+  onSubmit() {
+    this.showAlert = false;
 
-    if(this.formLogin.get('user').value == '1801821388' && this.formLogin.get('password').value == 'Seguros2022'){
-      this.saveToken('sdfsdfsdf3213132fdfsd21');
-      this.router.navigate(['claims/wizard']);
-    }else{
-      this.formLogin.setErrors({ unauthenticated: true });
+    if (this.formLogin.valid) {
+      if(this.formLogin.get('user').value == '1801821388' && this.formLogin.get('password').value == 'Seguros2022'){
+        this.saveToken('sdfsdfsdf3213132fdfsd21');
+        this.router.navigate(['claims/wizard']);
+      }else{
+        this.showAlert = true;
+        this.formLogin.patchValue({ password: '' });
+      }
     }
-  }
 
-  handleReset() {
-    this.formLogin.reset();
-  }
-
-  slickInit(e: any) {
-    console.log('slick initialized');
-  }
-
-  breakpoint(e: any) {
-    console.log('breakpoint');
   }
 
   saveToken(token) {
