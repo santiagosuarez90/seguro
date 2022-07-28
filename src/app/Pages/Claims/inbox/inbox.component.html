@@ -1,0 +1,50 @@
+<app-page-title-new [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title-new>
+
+<div class="mb-5">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataClaims" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="claim_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Siniestro</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.claim_id}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="policy_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Póliza</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.policy_id}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="client_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Cliente</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.client_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="account_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.account_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estado</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="advance">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Avance</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.advance}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.action}} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="tittles"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: tittles;"></mat-row>
+
+      <!-- Row shown when there is no matching data. -->
+      <ng-container *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </ng-container>
+    </mat-table>
+
+    <mat-paginator aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
