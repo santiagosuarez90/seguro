@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "../../Commons/auth.guard";
+import { AuthGuard } from "../../Commons/auth.guard";
 
 const routes: Routes = [
   {
@@ -10,6 +10,11 @@ const routes: Routes = [
       status: false
     },
     children: [
+      {
+        path: 'inbox',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule)
+      },
       {
         path: 'wizard',
         canActivate: [AuthGuard],
