@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'claims/wizard',
+        redirectTo: 'claims/inbox',
         pathMatch: 'full'
       },
     ]
