@@ -13,3 +13,12 @@ mat-error{
 .mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
   background-color: $red !important;
 }
+
+.mat-step-icon{
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.mat-step-icon-content > span.ng-star-inserted{
+  font-size: 1.2em !important;
+}

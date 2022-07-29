@@ -183,18 +183,18 @@ $list-group-border-color: rgba($primary, .08);
 
 // List Group
 
-@each $color, $value in $theme-colors {
-  @include list-group-item-variant($color, color-level($color, -9), color-level($color, 6));
-}
+// @each $color, $value in $theme-colors {
+  // @include list-group-item-variant($color, color-level($color, -9), color-level($color, 6));
+// }
 
 // Background
 
-@each $color, $value in $theme-colors {
-  @include bg-variant(".bg-#{$color}", $value);
-}
+// @each $color, $value in $theme-colors {
+  // @include bg-variant(".bg-#{$color}", $value);
+// }
 
 @if $enable-gradients {
   @each $color, $value in $theme-colors {
-    @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
+    // @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
   }
 }
