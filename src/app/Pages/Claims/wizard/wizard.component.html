@@ -4,8 +4,8 @@
   <div class="col-md-12">
     <div class="card main-card mb-3">
       <div class="card-body">
-        <mat-stepper linear #stepper selectedIndex="0">
-          <mat-step [stepControl]="formHolder">
+        <mat-stepper linear="true" #stepper selectedIndex="0">
+          <mat-step [stepControl]="formHolder" optionalLabel="PRUEBA">
             <form [formGroup]="formHolder">
               <ng-template matStepLabel>Datos del Titular</ng-template>
               <br>
@@ -89,7 +89,7 @@
               <br>
 
               <div>
-                <button class="me-2 mb-2" mat-raised-button matStepperNext color="primary">Siguiente</button>
+                <button class="me-2 mb-2" mat-raised-button matStepperNext color="primary" (click)="onChange($event)">Siguiente</button>
               </div>
             </form>
           </mat-step>
@@ -99,12 +99,20 @@
               <br>
               <h3>Ingrese información del siniestrado</h3>
               <br>
+              <div class="row form-group mt-3">
+                <div class="col-md-6">
+                  <label class="font-weight-bold"><strong>El afectado es el Titular de esta Cuenta?</strong></label>
+                  &nbsp;&nbsp;
+                  <bSwitch switch-size="mini" switch-on-color="info" formControlName="affectedSwitch" switch-off-text="NO" switch-on-text="SI" (click)="disabled = !disabled" (changeState)="onChange($event)" ></bSwitch>
+                </div>
+              </div>
+              <br>
               <div class="row form-group">
                 <div class="col-md-6">
                   <mat-form-field style="width: 100%;">
                     <mat-placeholder>Cédula</mat-placeholder>
                       <input matInput type="search" formControlName="affectedIdentification" [errorStateMatcher]="matcher" [maxLength]="10">
-                      <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="affectedSearch($event)">
+                      <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="affectedSearch($event)" *ngIf="!disabled">
                         <mat-icon>search</mat-icon>
                     </button>
                   </mat-form-field>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -33,12 +33,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class WizardComponent implements OnInit {
   heading = 'Siniestro';
   subheading = 'Registrar un nuevo siniestro.';
   icon = 'pe-7s-wallet icon-gradient bg-plum-plate';
+
+  disabled = true;
+
+  inputFormControl = new FormControl({ disabled: this.disabled });
 
   formHolder: FormGroup;
   formAffected: FormGroup;
@@ -124,6 +129,7 @@ export class WizardComponent implements OnInit {
       affectedEmail: ['', Validators.required],
       affectedPhone: ['', Validators.required],
       affectedCity: ['01', Validators.required],
+      affectedSwitch: ['01', Validators.required],
     });
 
     this.formClaim = this.formBuilder.group({
@@ -161,6 +167,14 @@ export class WizardComponent implements OnInit {
         holderEmail: 'wilfrido.moreno@gmail.com',
         holderPhone: '0999765456'
       });
+    }else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'info',
+        title: 'La cédula no existe.',
+        showConfirmButton: false,
+        timer: 2500
+      });
     }
   };
 
@@ -175,6 +189,14 @@ export class WizardComponent implements OnInit {
         affectedAddress: '10 de Agosto N34-23 y 6 de Diciembre, Edf, Ecensse',
         affectedEmail: 'wilfrido.moreno@gmail.com',
         affectedPhone: '0999765456'
+      });
+    }else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'info',
+        title: 'La cédula no existe.',
+        showConfirmButton: false,
+        timer: 2500
       });
     }
   };
@@ -194,6 +216,28 @@ export class WizardComponent implements OnInit {
     this.formClaim.reset();
     this.formPolicy.reset();
     this.formResume.reset();
+  }
+
+  onChange(event) {
+    if(this.formAffected.get('affectedSwitch').value){
+      this.formAffected.disable();
+      this.formAffected.controls['affectedSwitch'].enable();
+
+      this.formAffected.patchValue({
+        affectedIdentification: this.formHolder.get('holderIdentification').value,
+        affectedBirthDay: this.formHolder.get('holderBirthDay').value,
+        affectedName: this.formHolder.get('holderName').value,
+        affectedLastName: this.formHolder.get('holderLastName').value,
+        affectedAddress: this.formHolder.get('holderAddress').value,
+        affectedEmail: this.formHolder.get('holderEmail').value,
+        affectedPhone: this.formHolder.get('holderPhone').value,
+        affectedCity: this.formHolder.get('holderCity').value,
+      });
+
+    }else{
+      this.formAffected.reset();
+      this.formAffected.enable();
+    }
   }
 
   generateRandom(){
