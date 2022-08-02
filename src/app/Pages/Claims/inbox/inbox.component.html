@@ -1,12 +1,12 @@
-<app-page-title-new [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title-new>
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
 
 <div class="mb-5">
   <div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataClaims" matSort>
+    <mat-table #table [dataSource]="dataClaims" matSort class="full-width-table">
       <!-- Position Column -->
       <ng-container matColumnDef="claim_id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Siniestro</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.claim_id}} </mat-cell>
+        <mat-cell *matCellDef="let element"> <mat-icon>local_pharmacy</mat-icon> &nbsp; {{element.claim_id}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="policy_id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Póliza</mat-header-cell>
@@ -30,11 +30,13 @@
       </ng-container>
       <ng-container matColumnDef="advance">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Avance</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.advance}} </mat-cell>
+        <mat-cell *matCellDef="let element"><mat-progress-bar mode="determinate" [color]="getColor(element.advance)" [value]="element.advance"></mat-progress-bar></mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.action}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef > Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+          <button mat-raised-button class="me-2 mb-2" color="primary" >Detalle</button>
+        </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="tittles"></mat-header-row>
       <mat-row *matRowDef="let row; columns: tittles;"></mat-row>

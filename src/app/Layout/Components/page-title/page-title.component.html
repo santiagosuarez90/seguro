@@ -12,13 +12,61 @@
       </div>
     </div>
     <div class="page-title-actions">
-      <button type="button" class="btn-shadow me-3 btn btn-dark">
-        <fa-icon [icon]="faStar"></fa-icon>
-      </button>
-      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">
-        <fa-icon [icon]="faPlus" class="me-2"></fa-icon>
-        Create New
-      </button>
+    <div class="header-dots">
+      <div class="btn-group" ngbDropdown display="dynamic" placement="bottom-right" container="body">
+        <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" ngbDropdownToggle>
+          <fa-icon [icon]="faPlus" class="me-2"></fa-icon>
+          Nuevo Siniestro
+        </button>
+        <div class="dropdown-menu-xl" ngbDropdownMenu>
+          <div class="dropdown-menu-header">
+            <div class="dropdown-menu-header-inner bg-plum-plate">
+              <div class="menu-header-image dd-header-bg-1"></div>
+              <div class="menu-header-content text-white">
+                <h5 class="menu-header-title">Reporte un Siniestro</h5>
+              </div>
+            </div>
+          </div>
+          <div class="grid-menu grid-menu-xl grid-menu-3col">
+            <div class="g-0 row">
+              <div class="col-sm-6 col-xl-4">
+                <button class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+                  <i class="pe-7s-world icon-gradient bg-night-fade btn-icon-wrapper btn-icon-lg mb-3"></i>
+                  Desempleo
+                </button>
+              </div>
+              <div class="col-sm-6 col-xl-4">
+                <button class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+                  <i class="pe-7s-piggy icon-gradient bg-night-fade btn-icon-wrapper btn-icon-lg mb-3"></i>
+                  Asistencia
+                </button>
+              </div>
+              <div class="col-sm-6 col-xl-4">
+
+              </div>
+              <div class="col-sm-6 col-xl-4">
+                <button class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+                  <i class="pe-7s-browser icon-gradient bg-night-fade btn-icon-wrapper btn-icon-lg mb-3"></i>
+                  Accidentes Personales
+                </button>
+              </div>
+              <div class="col-sm-6 col-xl-4">
+                <button class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+                  <i class="pe-7s-hourglass icon-gradient bg-night-fade btn-icon-wrapper btn-icon-lg mb-3"></i>
+                  Incendio
+                </button>
+              </div>
+              <div class="col-sm-6 col-xl-4">
+                <button class="btn-icon-vertical btn-square btn-transition btn btn-outline-link" (click)="redirectClaims()">
+                  <i class="pe-7s-world icon-gradient bg-night-fade btn-icon-wrapper btn-icon-lg mb-3"></i>
+                  Vida
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>

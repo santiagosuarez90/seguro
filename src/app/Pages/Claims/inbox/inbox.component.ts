@@ -31,6 +31,16 @@ export class InboxComponent implements AfterViewInit {
 
   }
 
+  getColor(value){
+    if(value < 30){
+
+    }else if(value >= 30 && value <= 70){
+      return 'warn';
+    }else{
+
+    }
+  }
+
 }
 
 export interface Element {

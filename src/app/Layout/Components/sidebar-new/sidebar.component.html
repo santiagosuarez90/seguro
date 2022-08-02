@@ -35,8 +35,13 @@
                 <ng-template ngbPanelContent>
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
+                    <div class="vsm-item">
+                        <a routerLink="/claims/inbox" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                          <span class="vsm-title">Bandeja de Entrada</span>
+                        </a>
+                      </div>
                       <div class="vsm-item">
-                        <a routerLink="/claims/wizard" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                        <a routerLink="/claims/wizard" routerLinkActive="active-item" class="vsm-link">
                           <span class="vsm-title">Nuevo</span>
                         </a>
                       </div>
