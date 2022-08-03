@@ -10,6 +10,12 @@ import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 
 import Swal from 'sweetalert2';
+import {MatSelectChange} from "@angular/material/select";
+
+export interface ICity {
+  value: string;
+  name: string;
+}
 
 const moment = _rollupMoment || _moment;
 
@@ -40,6 +46,8 @@ export class WizardComponent implements OnInit {
   heading = 'Siniestro';
   subheading = 'Registrar un nuevo siniestro.';
   icon = 'pe-7s-wallet icon-gradient bg-plum-plate';
+  holderCitySelected : ICity;
+
 
   disabled = true;
 
@@ -129,7 +137,7 @@ export class WizardComponent implements OnInit {
       affectedEmail: ['', Validators.required],
       affectedPhone: ['', Validators.required],
       affectedCity: ['01', Validators.required],
-      affectedSwitch: ['01', Validators.required],
+      affectedSwitch: ['01'],
     });
 
     this.formClaim = this.formBuilder.group({
@@ -153,6 +161,14 @@ export class WizardComponent implements OnInit {
 
     this.formResume = this.formBuilder.group({
     });
+  }
+
+  selectedValue(event: MatSelectChange) {
+    this.holderCitySelected = {
+      value: event.value,
+      name: event.source.triggerValue
+    };
+    console.log(this.holderCitySelected);
   }
 
   holderSearch = function(event) {
@@ -236,11 +252,37 @@ export class WizardComponent implements OnInit {
 
     }else{
       this.formAffected.reset();
+      this.formAffected.patchValue({
+        affectedIdentification: "",
+        affectedBirthDay: "",
+        affectedName: "",
+        affectedLastName: "",
+        affectedAddress: "",
+        affectedEmail: "",
+        affectedPhone: "",
+        affectedCity: "01",
+      });
       this.formAffected.enable();
     }
   }
 
   generateRandom(){
     return Math.floor(Math.random() * 1000000);
+  }
+
+  getValueForm(formName: string, inputName: string): FormControl {
+    let response;
+
+    switch (formName){
+      case 'formHolder':
+        response = this.formHolder.get(inputName);
+        break;
+
+      case 'formAffected':
+        response = this.formHolder.get(inputName);
+        break;
+    }
+
+    return response;
   }
 }

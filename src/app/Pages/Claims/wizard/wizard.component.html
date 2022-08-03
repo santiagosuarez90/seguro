@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <div class="card main-card mb-3">
       <div class="card-body">
-        <mat-stepper linear="true" #stepper selectedIndex="0">
+        <mat-stepper linear="true" #stepper selectedIndex="0" labelPosition="bottom">
           <mat-step [stepControl]="formHolder" optionalLabel="PRUEBA">
             <form [formGroup]="formHolder">
               <ng-template matStepLabel>Datos del Titular</ng-template>
@@ -19,6 +19,9 @@
                       <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="holderSearch($event)">
                         <mat-icon>search</mat-icon>
                     </button>
+                    <mat-error *ngIf="formHolder.get('holderIdentification').hasError('required')">
+                      Campo Obligatorio
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
@@ -26,6 +29,9 @@
                   <input matInput formControlName="holderBirthDay" [matDatepicker]="holderBirthDayPicker" [errorStateMatcher]="matcher" placeholder="Fecha de Nacimiento">
                   <mat-datepicker-toggle matSuffix [for]="holderBirthDayPicker"></mat-datepicker-toggle>
                   <mat-datepicker #holderBirthDayPicker></mat-datepicker>
+                  <mat-error *ngIf="formHolder.get('holderBirthDay').hasError('required')">
+                    Campo Obligatorio
+                  </mat-error>
                  </mat-form-field>
                 </div>
               </div>
@@ -77,7 +83,7 @@
                 </div>
                 <div class="col-md-6">
                  <mat-form-field style="width: 100%;">
-                   <mat-select placeholder="Ciudad" formControlName="holderCity">
+                   <mat-select placeholder="Ciudad" formControlName="holderCity" (selectionChange)="selectedValue($event)">
                      <mat-option *ngFor="let city of cities" [value]="city.value">
                        {{ city.name }}
                      </mat-option>
@@ -115,6 +121,9 @@
                       <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="affectedSearch($event)" *ngIf="!disabled">
                         <mat-icon>search</mat-icon>
                     </button>
+                    <mat-error *ngIf="formAffected.get('affectedIdentification').hasError('required')">
+                      Campo Obligatorio
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
@@ -122,6 +131,9 @@
                   <input matInput formControlName="affectedBirthDay" [matDatepicker]="affectedBirthDayPicker" [errorStateMatcher]="matcher" placeholder="Fecha de Nacimiento">
                   <mat-datepicker-toggle matSuffix [for]="affectedBirthDayPicker"></mat-datepicker-toggle>
                   <mat-datepicker #affectedBirthDayPicker></mat-datepicker>
+                  <mat-error *ngIf="formAffected.get('affectedBirthDay').hasError('required')">
+                    Campo Obligatorio
+                  </mat-error>
                  </mat-form-field>
                 </div>
               </div>
@@ -194,7 +206,7 @@
             <form [formGroup]="formPolicy">
               <ng-template matStepLabel>Datos de la Póliza</ng-template>
               <br>
-              <h3>Selecciona la Poliza para el reclamo</h3>
+              <h3>Selecciona la Póliza para el reclamo</h3>
               <br>
               <div class="bg-white">
                 <div class="table-responsive">
@@ -452,23 +464,60 @@
           </mat-step>
           <mat-step [stepControl]="formResume">
             <ng-template matStepLabel>Resumen</ng-template>
+            <br>
             <div class="row">
-              <div class="col-md-12 text-center">
-                <h2 class="text-primary">!Gracias por reportar su Siniestro¡</h2>
+              <div class="col-md-4">
+                <div class="card-shadow-info border mb-3 card card-body border-info">
+                  <h5 class="card-title">Datos del Titular</h5>
+                  <mat-label><strong>Cédula:</strong> {{ getValueForm('formHolder', 'holderIdentification').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Nombres:</strong> {{ getValueForm('formHolder', 'holderName').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Apellidos:</strong> {{ getValueForm('formHolder', 'holderLastName').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Dirección:</strong> {{ getValueForm('formHolder', 'holderAddress').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Email:</strong> {{ getValueForm('formHolder', 'holderEmail').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Teléfono:</strong> {{ getValueForm('formHolder', 'holderPhone').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Ciudad:</strong> {{ holderCitySelected !== undefined ? holderCitySelected.name : 'QUITO' }}</mat-label>
+                  <br>
+                  <mat-label><strong>Fecha de Cumpleaños:</strong> {{ getValueForm('formHolder', 'holderBirthDay').value }}</mat-label>
+                </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <h2>Su número de caso es VID-{{ codeOne }}-{{ codeSecond }}</h2>
+              <div class="col-md-4">
+                <div class="card-shadow-info border mb-3 card card-body border-info">
+                  <h5 class="card-title">Datos del Afectado</h5>
+                  <mat-label><strong>Cédula:</strong> {{ getValueForm('formAffected', 'holderIdentification').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Nombres:</strong> {{ getValueForm('formAffected', 'holderName').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Apellidos:</strong> {{ getValueForm('formAffected', 'holderLastName').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Dirección:</strong> {{ getValueForm('formAffected', 'holderAddress').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Email:</strong> {{ getValueForm('formAffected', 'holderEmail').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Teléfono:</strong> {{ getValueForm('formAffected', 'holderPhone').value }}</mat-label>
+                  <br>
+                  <mat-label><strong>Ciudad:</strong> {{ holderCitySelected !== undefined ? holderCitySelected.name : 'QUITO' }}</mat-label>
+                  <br>
+                  <mat-label><strong>Fecha de Cumpleaños:</strong> {{ getValueForm('formAffected', 'holderBirthDay').value }}</mat-label>
+                </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <div class="alert alert-warning" role="alert">
-                  <h4 class="alert-heading">Atención!</h4>
-                  <p>La información será enviada al correo y número de la persona de contacto.</p>
+              <div class="col-md-4">
+                <div class="card-shadow-info border mb-3 card card-body border-info">
+                  <h5 class="card-title">Datos de la Póliza</h5>
+                  <br>
+                  <mat-label>Poliza de Vida</mat-label>
+                  <br>
+                  <mat-label><strong>Num:</strong> 4931</mat-label>
+                  <br>
+                  <mat-label><strong>Producto:</strong> Crédito Desgravamen BP</mat-label>
+                  <br>
+                  <mat-label><strong>Cobertura:</strong> Gastos por entierro</mat-label>
+                  <br>
                 </div>
               </div>
             </div>
